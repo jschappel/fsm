@@ -334,7 +334,7 @@ Empty Tool
                           (A b A))))
   (sm-visualize a*a)
   )
-@centered{@image[#:suffixes @list[".png"] #:scale .6]{image/aStar}}
+@centered{@image[#:suffixes @list[".png"] #:scale .6]{scribblings/image/aStar}}
 
 @(linebreak)Prebuilt Machine with Invariants
 @(racketblock
@@ -358,7 +358,7 @@ Empty Tool
                 (list 'F F-INV)
                 (list 'A A-INV) 
                 (list 'ds DEAD-INV)))
-@centered{@image[#:suffixes @list[".png"] #:scale .6]{image/aStarInv}}
+@centered{@image[#:suffixes @list[".png"] #:scale .6]{scribblings/image/aStarInv}}
 
 
 @section{State Machine Observers}

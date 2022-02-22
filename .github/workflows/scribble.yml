@@ -3,12 +3,15 @@ name: Scribble-Deploy
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
-  paths:
+    paths:
     - 'fsm/scribblings/**'
     - '.github/workflows/scribble.yml'
-    
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'fsm/scribblings/**'
+      - '.github/workflows/scribble.yml'
+
 jobs:
   publish:
     runs-on: 'ubuntu-latest'

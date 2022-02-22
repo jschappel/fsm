@@ -24,15 +24,14 @@ jobs:
       - name: Checkout 
         uses: actions/checkout@master
 
-      - name: Install Racket and Raco 
-        uses: Bogdanp/setup-racket@v1.3 # see https://github.com/Bogdanp/setup-racket for more info
+      - name: install racket
+        uses: Bogdanp/setup-racket@v1.7 # see https://github.com/Bogdanp/setup-racket for more info
         with:
-          distribution: 'full' # or: 'minimal'
-          variant: 'CS'        # or: 'BC' for Racket Before Chez
-          version: 'stable'       # or: 'stable' for the latest version, 'current' for the latest snapshot
-          sudo: never
-          dest: '${HOME}/racket'
-      - name: Add racket to PATH
-        run: echo "${HOME}/racket/bin" >> $GITHUB_PATH
-      - name: Build Library
-        run: xvfb-run racket main.rkt
+          architecture: 'x64'
+          distribution: 'full'
+          variant: 'CS'
+          version: 'stable'
+      - name: install base package
+        run: |
+          raco pkg install --batch --auto ./fsm-lib ./fsm-doc/ ./fsm
+          raco setup --pkgs fsm fsm-lib

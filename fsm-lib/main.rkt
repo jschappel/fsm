@@ -1,11 +1,9 @@
-
-
-
 (module fsm racket
 
   (require "fsm-main.rkt" "./FSM-Visualization/visualize.rkt" "./GraphViz/render-graph.rkt")
 
   (provide
+  (all-from-out racket)
    check-machine
    empties
 

@@ -4,12 +4,12 @@ on:
   push:
     branches: [ master ]
     paths:
-    - 'fsm/scribblings/**'
+    - 'fsm/fsm-doc/**'
     - '.github/workflows/scribble.yml'
   pull_request:
     branches: [ master ]
     paths:
-      - 'fsm/scribblings/**'
+      - 'fsm/fsm-doc/**'
       - '.github/workflows/scribble.yml'
 
 jobs:
@@ -26,11 +26,11 @@ jobs:
         variant: 'CS'
         version: 'stable'
     - name: install base package
-      run: raco pkg install --batch --auto --skip-uninstalled docs
+      run: raco pkg install --batch --auto fsm-lib fsm-doc fsm
     - name: build docs
-      run: scribble +m --redirect-main http://pkg-build.racket-lang.org/doc/ --htmls --dest ./docs ./fsm/scribblings/fsm.scrbl
+      run: scribble +m --redirect-main http://pkg-build.racket-lang.org/doc/ --htmls --dest ./docs ./fsm/fsm-doc/scribblings/fsm.scrbl
     - name: push to gh-pages
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
-        folder: docs/
+        folder: docs/fsm-doc
         branch: master

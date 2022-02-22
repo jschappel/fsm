@@ -1,0 +1,30 @@
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  paths:
+    - 'fsm/scribblings/**'
+    - '.github/workflows/scribble.yml'
+jobs:
+  publish:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+    - name: install racket
+      uses: Bogdanp/setup-racket@v1.7
+      with:
+        architecture: 'x64'
+        distribution: 'full'
+        variant: 'CS'
+        version: 'stable'
+    - name: install base package
+      run: raco pkg install --batch --auto
+    - name: build docs
+      run: scribble +m --redirect-main http://pkg-build.racket-lang.org/doc/ --htmls --dest ./docs ./fsm/scribblings/fsm.scrbl
+    - name: push to gh-pages
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        folder: docs/keyring
+        branch: gh-pages
